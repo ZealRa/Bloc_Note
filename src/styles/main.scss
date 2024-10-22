@@ -1,0 +1,277 @@
+// Import Google Fonts for a clean modern look
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+// Color Variables
+$primary-color: #2c3e50; // Dark blue-gray for the sidebar and general text
+$accent-color: #e74c3c; // Red for accent elements like buttons
+$background-color: #f4f6f7; // Light gray for the main background
+$note-bg-color: #ffffff; // White background for notes
+$border-color: #dfe6e9; // Light gray for borders
+$text-color: #34495e; // Darker text color
+$placeholder-color: #95a5a6; // Grey for placeholder text
+$shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Soft shadow for modern look
+
+// Global Styles
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: $background-color;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  height: 100vh;
+}
+
+// Container layout
+.container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+// Sidebar (Note List)
+.note-list {
+  width: 250px;
+  background-color: $primary-color;
+  color: #fff;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+  }
+
+  .add-note-button {
+    background-color: $accent-color;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+    font-weight: bold;
+
+    &:hover {
+      background-color: darken($accent-color, 10%);
+    }
+  }
+
+  .note-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: lighten($primary-color, 5%);
+    border-radius: 5px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: 1px solid transparent;
+
+    .note-content {
+      flex: 1;
+      h3 {
+        font-size: 1.2rem;
+        margin: 0 0 5px;
+      }
+
+      p {
+        font-size: 0.9rem;
+        color: lighten(#fff, 30%);
+        margin: 0;
+      }
+    }
+
+    .delete-note-button {
+      background-color: #e74c3c;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: darken(#e74c3c, 10%);
+      }
+    }
+
+    &:hover {
+      background-color: lighten($primary-color, 10%);
+    }
+  }
+
+  .note-item-active {
+    background-color: lighten($primary-color, 15%);
+    border: 1px solid $accent-color;
+  }
+}
+
+// Main content area
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  background-color: $note-bg-color;
+  overflow-y: auto;
+}
+
+// Styles for the note display
+.note-display {
+  background-color: $note-bg-color;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: $shadow;
+  overflow-y: auto;
+  max-height: 400px;
+  line-height: 1.6;
+  font-size: 1rem;
+
+  h1, h2, h3 {
+    color: $text-color;
+    margin-bottom: 15px;
+  }
+
+  p {
+    margin-bottom: 10px;
+    color: $text-color;
+  }
+
+  code {
+    background-color: #ecf0f1;
+    padding: 4px 6px;
+    border-radius: 4px;
+    color: $accent-color;
+  }
+
+  a {
+    color: $accent-color;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  ul, ol {
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+// Message when there's no note to display
+.empty-note-message {
+  font-size: 1.2rem;
+  color: #7f8c8d;
+  text-align: center;
+  padding: 20px;
+}
+
+// Styles for the note editor
+.note-editor {
+  background-color: $note-bg-color;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: $shadow;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.note-title-input {
+  font-size: 1.3rem;
+  padding: 12px;
+  border: 1px solid $border-color;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.note-content-textarea {
+  padding: 15px;
+  font-size: 1rem;
+  height: 150px;
+  border: 1px solid $border-color;
+  border-radius: 5px;
+  width: 100%;
+  resize: vertical;
+}
+
+.save-note-button {
+  align-self: flex-end;
+  background-color: $accent-color;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+
+  &:hover {
+    background-color: darken($accent-color, 10%);
+  }
+}
+
+/* Styles pour le pop-up */
+.popup {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4CAF50; /* Vert pour le succès */
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: fadein 0.5s, fadeout 0.5s 2.5s; /* Animation pour apparaître et disparaître */
+  }
+  
+  @keyframes fadein {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes fadeout {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  
+
+// Scrollbar styles for both main content and sidebar
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: $background-color;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $accent-color;
+  border-radius: 5px;
+}
+
+// Responsive Design for mobile view
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .note-list {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .main-content {
+    padding: 20px;
+  }
+}

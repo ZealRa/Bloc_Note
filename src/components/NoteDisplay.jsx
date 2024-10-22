@@ -6,9 +6,10 @@ const NoteDisplay = ({ markdown }) => {
   const htmlContent = converter.makeHtml(markdown);
 
   return (
-    <div className="note-display">
-      <div dangerouslySetInnerHTML={{ __html: htmlContent }} />{" "}
-    </div>
+    <div
+      className="note-display"
+      dangerouslySetInnerHTML={{ __html: htmlContent }}
+    />
   );
 };
 

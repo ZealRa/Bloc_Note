@@ -21,8 +21,8 @@ body {
   height: 100vh;
 }
 
-// Container layout
-.container {
+// Main App Container
+.app-container {
   display: flex;
   height: 100%;
   width: 100%;
@@ -30,7 +30,7 @@ body {
 }
 
 // Sidebar (Note List)
-.note-list {
+.sidebar {
   width: 250px;
   background-color: $primary-color;
   color: #fff;
@@ -39,14 +39,7 @@ body {
   flex-direction: column;
   justify-content: flex-start;
 
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    overflow-y: auto;
-  }
-
-  .add-note-button {
+  button {
     background-color: $accent-color;
     color: #fff;
     border: none;
@@ -63,23 +56,30 @@ body {
     }
   }
 
-  .note-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    background-color: lighten($primary-color, 5%);
-    border-radius: 5px;
-    margin-bottom: 15px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    border: 1px solid transparent;
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
 
-    .note-content {
-      flex: 1;
-      h3 {
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      background-color: lighten($primary-color, 5%);
+      border-radius: 5px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: lighten($primary-color, 10%);
+      }
+
+      strong {
         font-size: 1.2rem;
-        margin: 0 0 5px;
+        color: $text-color;
       }
 
       p {
@@ -88,41 +88,33 @@ body {
         margin: 0;
       }
     }
-
-    .delete-note-button {
-      background-color: #e74c3c;
-      color: #fff;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 3px;
-      cursor: pointer;
-      font-size: 0.8rem;
-      transition: background-color 0.3s ease;
-
-      &:hover {
-        background-color: darken(#e74c3c, 10%);
-      }
-    }
-
-    &:hover {
-      background-color: lighten($primary-color, 10%);
-    }
-  }
-
-  .note-item-active {
-    background-color: lighten($primary-color, 15%);
-    border: 1px solid $accent-color;
   }
 }
 
-// Main content area
-.main-content {
+// Note Editor
+.note-editor {
   flex: 1;
   display: flex;
   flex-direction: column;
   padding: 40px;
   background-color: $note-bg-color;
   overflow-y: auto;
+
+  button {
+    align-self: flex-end;
+    background-color: $accent-color;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+
+    &:hover {
+      background-color: darken($accent-color, 10%);
+    }
+  }
 }
 
 // Styles for the note display
@@ -168,25 +160,7 @@ body {
   }
 }
 
-// Message when there's no note to display
-.empty-note-message {
-  font-size: 1.2rem;
-  color: #7f8c8d;
-  text-align: center;
-  padding: 20px;
-}
-
-// Styles for the note editor
-.note-editor {
-  background-color: $note-bg-color;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: $shadow;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
+// Styles for the note editor inputs
 .note-title-input {
   font-size: 1.3rem;
   padding: 12px;
@@ -205,47 +179,6 @@ body {
   resize: vertical;
 }
 
-.save-note-button {
-  align-self: flex-end;
-  background-color: $accent-color;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.3s;
-
-  &:hover {
-    background-color: darken($accent-color, 10%);
-  }
-}
-
-/* Styles pour le pop-up */
-.popup {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #4CAF50; /* Vert pour le succès */
-    color: white;
-    padding: 15px 20px;
-    border-radius: 5px;
-    font-size: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    animation: fadein 0.5s, fadeout 0.5s 2.5s; /* Animation pour apparaître et disparaître */
-  }
-  
-  @keyframes fadein {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  
-  @keyframes fadeout {
-    from { opacity: 1; }
-    to { opacity: 0; }
-  }
-  
-
 // Scrollbar styles for both main content and sidebar
 ::-webkit-scrollbar {
   width: 10px;
@@ -262,16 +195,16 @@ body {
 
 // Responsive Design for mobile view
 @media (max-width: 768px) {
-  .container {
+  .app-container {
     flex-direction: column;
   }
 
-  .note-list {
+  .sidebar {
     width: 100%;
     padding: 20px;
   }
 
-  .main-content {
+  .note-editor {
     padding: 20px;
   }
 }

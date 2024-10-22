@@ -3,7 +3,6 @@ import MarkdownInput from "./components/MarkDownInput";
 import NoteDisplay from "./components/NoteDisplay";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/main.scss";
-import Showdown from "showdown";
 
 const App = () => {
   const [notes, setNotes] = useState(
@@ -13,7 +12,7 @@ const App = () => {
     notes[0] || { title: "", content: "" }
   );
   const [content, setContent] = useState(selectedNote.content);
-  const [showPopup, setShowPopup] = useState(false); // État pour gérer le popup
+  const [showPopup, setShowPopup] = useState(false);
 
   const handleDeleteNote = (index) => {
     const updatedNotes = notes.filter((_, i) => i !== index);
@@ -40,9 +39,8 @@ const App = () => {
     setNotes(updatedNotes);
     localStorage.setItem("notes", JSON.stringify(updatedNotes));
 
-    // Afficher le pop-up de confirmation
     setShowPopup(true);
-    setTimeout(() => setShowPopup(false), 3000); // Pop-up visible pendant 3 secondes
+    setTimeout(() => setShowPopup(false), 3000);
   };
 
   const handleContentChange = (newContent) => {
@@ -89,11 +87,8 @@ const App = () => {
       <div className="main-content">
         {selectedNote ? (
           <>
-            <NoteDisplay markdown={content} /> {/* Passe le contenu ici */}
-            <MarkdownInput
-              note={selectedNote}
-              onSave={handleContentChange} // Passe la fonction de changement
-            />
+            <NoteDisplay markdown={content} />
+            <MarkdownInput note={selectedNote} onSave={handleContentChange} />
           </>
         ) : (
           <div className="empty-note-message">Aucune note sélectionnée</div>
